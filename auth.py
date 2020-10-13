@@ -3,7 +3,7 @@ import os
 import requests
 import time
 from base64 import b64encode
-from config import toggl_api, toggl_creds
+from config import toggl_api, toggl_creds, endpoints
 
 TOKEN_FILE = "toggl_token.json"
 
@@ -13,10 +13,6 @@ def modification_date(filename):
 
 
 def download_token():
-    base = "https://api.plan.toggl.com/api/v5/"
-    workspace = "274880/"
-    auth_endpoint = f"{base}{workspace}authenticate/token"
-
     key = toggl_api()["key"]
     secret = toggl_api()["secret"]
 
@@ -32,7 +28,7 @@ def download_token():
         "password": toggl_creds()["pass"]
     }
 
-    data = requests.post(auth_endpoint,
+    data = requests.post(endpoints()["auth_token"],
                          data=auth_params,
                          headers=headers).json()
     with open(TOKEN_FILE, "w") as f:
@@ -47,9 +43,6 @@ def auth_header():
         seconds_since = time.time() - modification_date(TOKEN_FILE)
         if seconds_since > data["expires_in"]:
             data = download_token()
-        else:
-            seconds_until = data["expires_in"] - seconds_since
-            print(f"Seconds till token expires: {seconds_until}")
     except Exception:
         data = download_token()
     result_header = {
