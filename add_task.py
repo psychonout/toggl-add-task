@@ -23,8 +23,8 @@ def add_task(name, timeframe, priority, date=datetime.now().date().isoformat()):
     # self development
     elif (priority == "sd"):
         project_id = 1496914
+    # maintanence by default
     else: 
-        # maintanence
         project_id = 1496913
     params = {
         "color": color,
@@ -39,7 +39,15 @@ def add_task(name, timeframe, priority, date=datetime.now().date().isoformat()):
     result = requests.post(endpoints()["tasks"],
                   headers=auth_header(),
                   data=params)
-    print(result)
+    printResult(result)
+
+def printResult(result):
+    if (result.status == 200):
+        print("Successfully added to toggl")
+    else:
+        print("Error adding to toggle:")
+        print(result.json())
+
 
 
 if __name__ == "__main__":
