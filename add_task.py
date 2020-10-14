@@ -14,10 +14,13 @@ def some_color():
 
 def add_task(name, timeframe, priority, date=datetime.now().date().isoformat()):
     color = str(some_color().lower())
+    # high priority
     if (priority == 'hp'):
         project_id = 1496530
+    # interuption 
     elif (priority == 'i'):
         project_id = 1496529
+    # self development
     elif (priority == "sd"):
         project_id = 1496914
     else: 
