@@ -39,15 +39,15 @@ def add_task(name, timeframe, priority, date=datetime.now().date().isoformat()):
     result = requests.post(endpoints()["tasks"],
                   headers=auth_header(),
                   data=params)
-    printResult(result)
+    print_result(result)
 
-def printResult(result):
+
+def print_result(result):
     if (result.status == 200):
         print("Successfully added to toggl")
     else:
         print("Error adding to toggle:")
         print(result.json())
-
 
 
 if __name__ == "__main__":
