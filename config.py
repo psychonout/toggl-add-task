@@ -10,7 +10,8 @@ def toggl_creds():
     # your toggl account username and password
     return {
         "user": "",
-        "pass": ""
+        "pass": "",
+        "id": ""
     }
 
 
