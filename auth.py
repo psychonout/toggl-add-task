@@ -5,7 +5,8 @@ import time
 from base64 import b64encode
 from config import toggl_api, toggl_creds, endpoints
 
-TOKEN_FILE = "toggl_token.json"
+SCRIPTS_FOLDER = os.path.realpath(__file__).replace("auth.py", "")
+TOKEN_FILE = os.path.join(SCRIPTS_FOLDER, "toggl_token.json")
 
 
 def modification_date(filename):

@@ -43,9 +43,10 @@ def add_task(name, timeframe, priority, date=datetime.now().date().isoformat()):
 
 
 def print_result(result):
-    if (result.status == 200):
+    if (result.status_code == 200):
         print("Successfully added to toggl")
     else:
+        print(result.status_code)
         print("Error adding to toggle:")
         print(result.json())
 
